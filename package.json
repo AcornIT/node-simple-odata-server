@@ -9,8 +9,14 @@
   "author": "Jan Blaha",
   "license": "MIT",
   "repository": "pofider/node-simple-odata-server",
-  "keywords": [ "OData", "server", "mongodb", "nedb"],
+  "keywords": [
+    "OData",
+    "server",
+    "mongodb",
+    "nedb"
+  ],
   "dependencies": {
+    "akera-api": "^1.0.9",
     "methods": "1.1.1",
     "odata-parser": "1.2.0",
     "path-to-regexp": "1.0.3",
