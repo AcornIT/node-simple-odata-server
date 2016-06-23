@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+  <edmx:DataServices>
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="demo.sports2000">
+      <EntityType Name="Customer">
+        <Key>
+          <PropertyRef Name="CustNum"/>
+        </Key>
+        <Property Name="CustNum" Type="Edm.Int32" Nullable="true"/>
+        <Property Name="SalesRep" Type="Edm.String" Nullable="true"/>
+        <Property Name="Name" Type="Edm.String" Nullable="true"/>
+        <Property Name="Country" Type="Edm.String" Nullable="true"/>
+        <NavigationProperty Name="Orders" Type="Collection(demo.sports2000.Order)" Nullable="true" Partner="Customer"/>
+      </EntityType>
+      <EntityType Name="Order">
+        <Key>
+          <PropertyRef Name="OrderNum"/>
+        </Key>
+        <Property Name="CustNum" Type="Edm.Int32" Nullable="true"/>
+        <Property Name="OrderNum" Type="Edm.Int32" Nullable="true"/>
+        <Property Name="SalesRep" Type="Edm.String" Nullable="true"/>
+        <Property Name="OrderDate" Type="Edm.Date" Nullable="true"/>
+        <NavigationProperty Name="Customer" Type="demo.sports2000.Customer" Nullable="true" Partner="Orders"/>
+        <NavigationProperty Name="Lines" Type="Collection(demo.sports2000.OrderLine)" Nullable="true" Partner="Order"/>
+      </EntityType>
+      <EntityType Name="OrderLine">
+        <Key>
+          <PropertyRef Name="OrderNum"/>
+          <PropertyRef Name="OrderLine"/>
+        </Key>
+        <Property Name="OrderNum" Type="Edm.Int32" Nullable="true"/>
+        <Property Name="OrderLine" Type="Edm.Int32" Nullable="true"/>
+        <Property Name="Qty" Type="Edm.Int32" Nullable="true"/>
+        <Property Name="Amount" Type="Edm.Int32" Nullable="true"/>
+        <NavigationProperty Name="Order" Type="demo.sports2000.Order" Nullable="true" Partner="Lines"/>
+      </EntityType>
+      <EntityContainer Name="DefaultContainer">
+        <EntitySet EntityType="demo.sports2000.Customer" Name="Customers">
+          <NavigationPropertyBinding Path="Orders" Target="Orders"/>
+        </EntitySet>
+        <EntitySet EntityType="demo.sports2000.Order" Name="Orders">
+          <NavigationPropertyBinding Path="Customer" Target="Customers"/>
+          <NavigationPropertyBinding Path="Lines" Target="OrderLines"/>
+        </EntitySet>
+        <EntitySet EntityType="demo.sports2000.OrderLine" Name="OrderLines">
+          <NavigationPropertyBinding Path="Order" Target="Orders"/>
+        </EntitySet>
+      </EntityContainer>
+    </Schema>
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="demo.sports">
+      <EntityType Name="Customer">
+        <Key>
+          <PropertyRef Name="CustNum"/>
+        </Key>
+        <Property Name="CustNum" Type="Edm.Int32" Nullable="true"/>
+        <Property Name="SalesRep" Type="Edm.String" Nullable="true"/>
+        <Property Name="Name" Type="Edm.String" Nullable="true"/>
+        <Property Name="Country" Type="Edm.String" Nullable="true"/>
+        <NavigationProperty Name="Orders" Type="Collection(demo.sports.Order)" Nullable="true"/>
+      </EntityType>
+      <EntityType Name="Order">
+        <Key>
+          <PropertyRef Name="OrderNum"/>
+        </Key>
+        <Property Name="CustNum" Type="Edm.Int32" Nullable="true"/>
+        <Property Name="OrderNum" Type="Edm.Int32" Nullable="true"/>
+        <Property Name="SalesRep" Type="Edm.String" Nullable="true"/>
+        <Property Name="OrderDate" Type="Edm.Date" Nullable="true"/>
+        <NavigationProperty Name="Lines" Type="Collection(demo.sports.OrderLine)" Nullable="true"/>
+      </EntityType>
+      <EntityType Name="OrderLine" Abstract="true">
+        <Property Name="OrderNum" Type="Edm.Int32" Nullable="true"/>
+        <Property Name="OrderLine" Type="Edm.Int32" Nullable="true"/>
+        <Property Name="Qty" Type="Edm.Int32" Nullable="true"/>
+        <Property Name="Amount" Type="Edm.Int32" Nullable="true" Precision="2" DefaultValue="230"/>
+      </EntityType>
+      <EntityContainer Name="DefaultContainer">
+        <EntitySet EntityType="demo.sports.Customer" Name="Customers">
+          <NavigationPropertyBinding Path="Orders" Target="Orders"/>
+        </EntitySet>
+        <EntitySet EntityType="demo.sports.Order" Name="Orders">
+          <NavigationPropertyBinding Path="Lines" Target="OrderLines"/>
+        </EntitySet>
+        <EntitySet EntityType="demo.sports.OrderLine" Name="OrderLines"/>
+      </EntityContainer>
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>

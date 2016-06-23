@@ -16,18 +16,9 @@
     "nedb"
   ],
   "dependencies": {
-    "akera-api": "^1.0.9",
     "methods": "1.1.1",
     "odata-parser": "1.2.0",
     "path-to-regexp": "1.0.3",
-    "xmlbuilder": "2.5.0"
-  },
-  "devDependencies": {
-    "mocha": "2.2.1",
-    "nedb": "1.1.1",
-    "mongodb": "2.0.26",
-    "should": "5.2.0",
-    "supertest": "0.15.0",
-    "xml2js": "0.4.6"
+    "xmlbuilder": ">=2.5.0"
   }
 }

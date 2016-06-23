@@ -1,5 +1,5 @@
 module.exports = {
-  namespace : "demo.sports2000",
+  namespace : "demo.sports",
   entityTypes : {
     "Customer" : {
       properties : {
@@ -47,10 +47,13 @@ module.exports = {
           type : "Edm.Int32"
         },
         "Amount" : {
-          type : "Edm.Int32"
+          type : "Edm.Int32", 
+          initial : 230,
+          scale : false,
+          maxLen : "12a",
+          precision : 2
         }
-      },
-      key : [ "OrderNum", "OrderLine" ]
+      }
     }
   },
   entitySets : {
@@ -68,7 +71,6 @@ module.exports = {
 
   {
     name : "Orders",
-    partner : "Customer",
     from : "Customer",
     to : "Order",
     nullable : true,
@@ -77,7 +79,6 @@ module.exports = {
     }
   }, {
     name : "Lines",
-    partner : "Order",
     from : "Order",
     to : "OrderLine",
     nullable : true,
